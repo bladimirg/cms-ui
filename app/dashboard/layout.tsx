@@ -11,13 +11,13 @@ export default function RootLayout({
 }) {
   return (
     <html className="h-full bg-gray-100" lang="en">
-    <body className="h-full">
-    <Providers>
-      <ThemeProvider>
-      {children}
-      </ThemeProvider>
-    </Providers>
-    </body>
-  </html>
+      <body className="h-full">
+      <Providers>
+        <ThemeProvider>
+        {children}
+        </ThemeProvider>
+      </Providers>
+      </body>
+    </html>
   )
 }
