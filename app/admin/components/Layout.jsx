@@ -1,5 +1,5 @@
 "use client"
-import {Navigation} from './Navigation'
+import Navigation from './Navigation'
 import TopNav from '../../components/TopNav'
 import {
   ClockIcon,
@@ -14,7 +14,6 @@ import {
 } from '@heroicons/react/24/outline'
 
 const topNavigation = [
-
     { name: 'Dashboard', href: '/dashboard', current: false },
     { name: 'Plantilla', href: '#', current: false },
     { name: 'Plantilla Admin', href: '/admin', current: true },
@@ -22,8 +21,6 @@ const topNavigation = [
   ]
   
 const user = {
-
-
     name: 'Debbie Lewis',
     handle: 'deblewis',
     email: 'debbielewis@example.com',
@@ -39,8 +36,8 @@ const user = {
   ]
 const navigation = [
 
-    { name: 'Home', href: '/admin', icon: HomeIcon, current: true },
-    { name: 'Posts', href: '/admin', icon: ClockIcon, current: false },
+    { name: 'Home', href: '/admin', icon: HomeIcon, current: false },
+    { name: 'Posts', href: '#', icon: ClockIcon, current: false },
     { name: 'Categories', href: '/admin/categories', icon: ScaleIcon, current: false },
     { name: 'Cards', href: '#', icon: CreditCardIcon, current: false },
     { name: 'Recipients', href: '#', icon: UserGroupIcon, current: false },

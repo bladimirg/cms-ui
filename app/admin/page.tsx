@@ -1,34 +1,6 @@
 "use client"
 import { Layout } from './components/Layout'
-import { ScaleIcon,} from '@heroicons/react/24/outline'
-import {
-  BanknotesIcon,
-  BuildingOfficeIcon,
-  CheckCircleIcon,
-  ChevronRightIcon,
-} from '@heroicons/react/20/solid'
 
-const cards = [
-
-
-  { name: 'Account balance', href: '#', icon: ScaleIcon, amount: '$30,659.45' },
-  // More items...
-]
-const transactions = [
-
-
-  {
-    id: 1,
-    name: 'Payment to Molly Sanders',
-    href: '#',
-    amount: '$20,000',
-    currency: 'USD',
-    status: 'success',
-    date: 'July 11, 2020',
-    datetime: '2020-07-11',
-  },
-  // More transactions...
-]
 const statusStyles = {
   success: 'bg-green-100 text-green-800',
   processing: 'bg-yellow-100 text-yellow-800',

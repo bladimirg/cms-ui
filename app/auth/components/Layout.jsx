@@ -16,11 +16,11 @@ import {
 const topNavigation = [
 
 
-    { name: 'Dashboard', href: '/dashboard', current: true },
+    { name: 'Dashboard', href: '/dashboard', current: false },
     { name: 'Plantilla', href: '#', current: false },
     { name: 'Plantilla Admin', href: '/admin', current: false },
     { name: 'Forms', href: '#', current: false },
-    { name: 'Login', href: '/auth', current: false },
+    { name: 'Login', href: '/auth', current: true },
 
   ]
   
