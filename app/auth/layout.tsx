@@ -1,5 +1,6 @@
 import './globals.css'
 import Providers from "./providers";
+import { AuthProvider } from "../context/auth";
 import { ThemeProvider } from "./context/theme";
 import { QueryClient, QueryClientProvider} from 'react-query';
 
@@ -10,11 +11,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html className="h-full bg-gray-100" lang="en">
-      <body className="h-full">
+    <html  lang="en">
+      
+      <body>
       <Providers>
         <ThemeProvider>
+        <AuthProvider>
         {children}
+        </AuthProvider>
         </ThemeProvider>
       </Providers>
       </body>

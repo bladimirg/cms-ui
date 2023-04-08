@@ -1,9 +1,10 @@
+'use client';
 import Link from 'next/link'
-import { usePathname  } from "next/navigation";
+import { usePathname } from 'next/navigation';
+import clsx from 'clsx'
 
 const Navigation  = ({ navigation,secondaryNavigation, classNames })=>{
   const pathname = usePathname();
-  console.log(pathname);
   return (
     <aside className="py-6 lg:col-span-3">
       <nav className="space-y-1">
@@ -11,13 +12,12 @@ const Navigation  = ({ navigation,secondaryNavigation, classNames })=>{
           <Link href={item.href} 
             key={item.name}
             
-            className={classNames(
-              pathname === item.href
+            className={clsx(
+              'group flex items-center border-l-4 px-3 py-2 text-sm font-medium',
+              item.href === pathname
                 ? 'border-teal-500 bg-teal-50 text-teal-700 hover:bg-teal-50 hover:text-teal-700'
-                : 'border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900',
-              'group flex items-center border-l-4 px-3 py-2 text-sm font-medium'
+                : 'border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900'
             )}
-            aria-current={pathname=== item.href ? 'page' : undefined}
           >
             <item.icon
               className={classNames(
