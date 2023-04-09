@@ -1,11 +1,12 @@
 "use client"
 import { Layout } from './components/Layout'
 import { ScaleIcon,} from '@heroicons/react/24/outline'
-import { useLogin } from './hooks/useLogin';
+import { mutationLogin } from './hooks/mutationLogin';
 import Notification from './components/Notification'
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/auth";
-import { useRouter } from "next/router";
+import { useRouter } from 'next/navigation';
+
 
 
 export default function Home() {
@@ -16,41 +17,42 @@ export default function Home() {
   });
   const { email, password, buttonText } = values;
   const handleChange = name => event => {
-    // console.log(event.target.value);
+    console.log(event.target.value);
     setValues({ ...values, [name]: event.target.value });
   };
 
-
-
+  const mutation = mutationLogin()
   const [auth, setAuth] = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
-  const { data, refetch } = useLogin({email,password});  
+    
 
   // hooks
-  //const router = useRouter();
+  const router = useRouter();
+
 
   const clickSubmit = (values) => {
     // console.log("values => ", values);
     values.preventDefault() // prevents page reload
     setValues({ ...values, buttonText: 'Submitting' });
-    try {
-      setLoading(true);
-      refetch();  
-      console.log(values)
+    setLoading(true);
+    console.log("email"+email)
+    mutation.mutate(
+      {email,password},
+      {
+        onSuccess: function(json){
+          console.log("signin response => ", json);
+          // save user and token to context
+          setAuth(json);
 
-      // console.log("signin response => ", data);
-      // save user and token to context
-      setAuth(data);
-      // save user and token to local storage
-      localStorage.setItem("auth", JSON.stringify(data));
-      //toast.success("Successfully signed in");
-      // redirect user
-      //router.push("/");
-    } catch (err) {
-      console.log("err => ", err);
-      setLoading(false);
-      //toast.error("Signin failed. Try again.");
-    }
+          // save user and token to local storage
+          localStorage.setItem("auth", JSON.stringify(json));
+
+          //toast.success("Successfully signed in");
+          // redirect user
+          router.push("/dashboard");
+        }
+      }
+    );
   };
 
 

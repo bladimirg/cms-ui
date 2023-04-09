@@ -15,6 +15,20 @@ const TopNav = ({  classNames , topNavigation, user,userNavigation}) => {
       console.log("click ", e);
       setCurrent(e.key);
     };
+
+    const signOut = () => {
+      // remove from local storage
+      localStorage.removeItem("auth");
+      // remove from context
+      setAuth({
+        user: null,
+        token: "",
+      });
+      // redirect to login
+      router.push("/auth");
+    };
+  
+
     return (
         <>
         <Disclosure as="div" className="relative overflow-hidden bg-sky-700 pb-32">
