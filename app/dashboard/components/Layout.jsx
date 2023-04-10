@@ -1,4 +1,9 @@
 "use client"
+import { useAdmin } from '../../hooks/useAdmin';
+import { useRouter } from 'next/navigation';
+import { AuthContext } from "../../context/auth";
+import { mutationIsAdmin } from '@/app/hooks/mutationIsAdmin';
+import { useContext, useEffect, useState } from "react";
 import {Navigation} from './Navigation'
 import TopNav from '../../components/TopNav'
 import {
@@ -36,7 +41,7 @@ const user = {
 
     { name: 'Your Profile', href: '/profile' },
     { name: 'Settings', href: '#' },
-    { name: 'Sign out', href: '#' },
+    //{ name: 'Sign out', href: '#' },
   ]
 const navigation = [
 
@@ -56,6 +61,41 @@ const secondaryNavigation = [
 ]
 
 export function Layout({ children, classNames}) {
+
+  // hooks
+  const router = useRouter();
+
+  // context
+  const [auth, setAuth] = useContext(AuthContext);
+  
+  // state
+  const [loading, setLoading] = useState(true);
+
+  const mutation = mutationIsAdmin()
+  useEffect(() => {
+    console.log("token registrado")
+  console.log(auth?.token)
+    mutation.mutate(
+        {},
+        {
+          onError: error => {            
+            console.log('Mutation error:', error);
+            //router.push("/auth");
+          },
+          onSuccess: function(json){
+            setLoading(false);
+            console.log("passed ", json);
+          }
+        }
+      );
+
+  }, [auth?.token]);
+
+  if(loading){
+    return(<>Verifying security</>)
+  }
+  
+
     return (
         <>
             <TopNav topNavigation={topNavigation} userNavigation={userNavigation} user={user} classNames={classNames}/>

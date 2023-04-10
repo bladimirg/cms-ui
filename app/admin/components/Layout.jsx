@@ -1,4 +1,9 @@
 "use client"
+import { useAdmin } from '../../hooks/useAdmin';
+import { useRouter } from 'next/navigation';
+import { AuthContext } from "../../context/auth";
+import { useContext, useState } from "react";
+
 import Navigation from './Navigation'
 import TopNav from '../../components/TopNav'
 import {
@@ -51,7 +56,37 @@ const secondaryNavigation = [
     { name: 'Privacy', href: '#', icon: ShieldCheckIcon },
 ]
 
+
+
 export function Layout({ children, classNames}) {
+
+// context
+const [auth, setAuth] = useContext(AuthContext);
+
+// hooks
+const router = useRouter();
+const [current, setCurrent] = useState("mail");
+const { isLoading, error, data } = useAdmin()
+if(isLoading){
+  return(<>Loading</>)
+}
+if(error){
+  router.push("/auth");
+}
+console.log(data)
+if(!data){
+  //router.push("/auth");
+}
+
+
+
+
+
+
+
+
+
+
     return (
         <>
             <TopNav topNavigation={topNavigation} userNavigation={userNavigation} user={user} classNames={classNames}/>

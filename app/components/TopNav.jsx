@@ -1,5 +1,9 @@
 "use client"
-import { Fragment, useState } from 'react'
+import Link from 'next/link'
+import { useAdmin } from '../hooks/useAdmin';
+import { useRouter } from 'next/navigation';
+import { AuthContext } from "../context/auth";
+import {Fragment, useContext, useEffect, useState } from "react";
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { Disclosure, Menu, Switch, Transition } from '@headlessui/react'
 import {
@@ -9,12 +13,11 @@ import {
 } from '@heroicons/react/24/outline'
 
 const TopNav = ({  classNames , topNavigation, user,userNavigation}) => {
-    const [current, setCurrent] = useState("mail");
+    // context
+    const [auth, setAuth] = useContext(AuthContext);
 
-    const handleClick = (e) => {
-      console.log("click ", e);
-      setCurrent(e.key);
-    };
+    // hooks
+    const router = useRouter();
 
     const signOut = () => {
       // remove from local storage
@@ -140,6 +143,16 @@ const TopNav = ({  classNames , topNavigation, user,userNavigation}) => {
                                 )}
                               </Menu.Item>
                             ))}
+
+                            <Menu.Item key="signout" onClick={() => signOut()}>
+                            <a 
+                             className={classNames(
+                                      'block px-4 py-2 text-sm text-gray-700'
+                                    )}>
+                                   Sign out
+                                   </a>
+                              </Menu.Item>
+
                           </Menu.Items>
                         </Transition>
                       </Menu>
